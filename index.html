@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Birthday Ghulam Dastageer! ❤️</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts for luxury typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Great+Vibes&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <!-- Canvas for Continuous Floating Pink Rose Petals & Ambient Sparkles -->
+    <canvas id="petalsCanvas"></canvas>
+
+    <!-- Canvas for Stage 8 Fireworks Celebration -->
+    <canvas id="fireworksCanvas"></canvas>
+
+    <!-- Red Screen Flash / Wipe Transition Overlay -->
+    <div id="transitionOverlay" class="transition-overlay"></div>
+
+    <!-- Interactive Touch Heart Ripple Container -->
+    <div id="touchRippleContainer"></div>
+
+    <!-- Main Container -->
+    <div class="mobile-container">
+        <!-- Top Step Progress Dots (8 Total) -->
+        <div class="progress-dots" id="progressDots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+
+        <!-- STAGE 1: Glowing Centered Shining Heart Intro -->
+        <section class="stage active" id="stage1">
+            <div class="stage-content center-stage-content">
+                <div class="heart-pulse-wrapper" id="heartPulse">
+                    <div class="heart-shine-bloom"></div>
+                    <div class="heart-glow-aura"></div>
+                    <div class="main-beating-heart">
+                        <svg viewBox="0 0 24 24" fill="url(#heartShineGrad)" class="heart-svg">
+                            <defs>
+                                <radialGradient id="heartShineGrad" cx="50%" cy="35%" r="65%">
+                                    <stop offset="0%" stop-color="#ffffff" />
+                                    <stop offset="25%" stop-color="#ffb703" />
+                                    <stop offset="55%" stop-color="#ff0044" />
+                                    <stop offset="100%" stop-color="#7a0016" />
+                                </radialGradient>
+                            </defs>
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
+                    </div>
+                </div>
+                <p class="subtitle-text hint-text">Tap the heart</p>
+                <div class="tap-continue-box stage1-continue">
+                    <span>TAP TO CONTINUE</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- STAGE 2: Birthday Greeting Hero Screen with Date -->
+        <section class="stage" id="stage2">
+            <div class="stage-content center-flex text-center">
+                <h1 class="hero-title">HAPPY BIRTHDAY</h1>
+                
+                <!-- Top Decorative Line -->
+                <div class="name-decorator-line">
+                    <span class="dec-line"></span>
+                    <span class="dec-symbol">✦</span>
+                    <span class="dec-line"></span>
+                </div>
+
+                <h2 class="name-display" id="recipientName">GHULAM DASTAGEER</h2>
+
+                <!-- Bottom Decorative Line -->
+                <div class="name-decorator-line">
+                    <span class="dec-line"></span>
+                    <span class="dec-symbol">✦</span>
+                    <span class="dec-line"></span>
+                </div>
+
+                <p class="hero-subtitle">A SPECIAL DAY FOR A SPECIAL SOUL</p>
+
+                <!-- Birthday Date Pill -->
+                <div class="birthday-date-pill">
+                    <i data-lucide="calendar" class="date-icon"></i>
+                    <span>18 DECEMBER 2004</span>
+                </div>
+
+                <div class="tap-continue-box margin-top-lg">
+                    <span>TAP TO CONTINUE</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- STAGE 3: 15 Photo Memory Cards (Slideshow View) -->
+        <section class="stage" id="stage3">
+            <div class="stage-content center-flex text-center">
+                <span class="moment-tag" id="momentTag">MOMENT ONE</span>
+                <h2 class="moment-headline" id="momentTitle">A Moment Worth Remembering</h2>
+                
+                <div class="glowing-photo-frame">
+                    <div class="frame-border-glow"></div>
+                    <div class="photo-container">
+                        <img id="memoryPhoto" src="" alt="Memory Photo">
+                        <div class="photo-fallback-art" id="photoFallbackArt" style="display: none;">
+                            <span class="art-icon">💖</span>
+                            <span class="art-text">Beautiful Memory</span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="moment-caption" id="momentCaption">Every time you smile, the world feels a little brighter.</p>
+                
+                <div class="slide-navigation-dots" id="slideDots"></div>
+
+                <div class="tap-continue-box">
+                    <span id="memoryTapText">TAP FOR NEXT MOMENT</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- STAGE 4: Words From My Heart (2x2 Interactive Grid) -->
+        <section class="stage" id="stage4">
+            <div class="stage-content center-flex text-center">
+                <h2 class="script-header">Words From My Heart</h2>
+                <p class="grid-instruction">Tap each card to reveal</p>
+
+                <div class="cards-grid">
+                    <!-- Card 1 -->
+                    <div class="reveal-card" data-card="1">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <i data-lucide="heart" class="card-icon"></i>
+                                <span>Tap to open</span>
+                            </div>
+                            <div class="card-back">
+                                <p>Knowing you has been one of life's nicest surprises, and little by little, you became someone truly special.</p>
+                                <i data-lucide="heart" class="mini-heart-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="reveal-card" data-card="2">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <i data-lucide="check-circle" class="card-icon"></i>
+                                <span>Tap to open</span>
+                            </div>
+                            <div class="card-back">
+                                <p>You became someone I look forward to hearing from, someone whose presence brightens even the quiet moments.</p>
+                                <i data-lucide="heart" class="mini-heart-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="reveal-card" data-card="3">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <i data-lucide="star" class="card-icon"></i>
+                                <span>Tap to open</span>
+                            </div>
+                            <div class="card-back">
+                                <p>Thank you for bringing so much laughter, warmth, and genuine comfort into my everyday life.</p>
+                                <i data-lucide="heart" class="mini-heart-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="reveal-card" data-card="4">
+                        <div class="card-inner">
+                            <div class="card-front">
+                                <i data-lucide="gift" class="card-icon"></i>
+                                <span>Tap to open</span>
+                            </div>
+                            <div class="card-back">
+                                <p>May your birthday be filled with endless magic, unconditional love, and unforgettable happiness!</p>
+                                <i data-lucide="heart" class="mini-heart-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tap-continue-box margin-top-md" id="cardsContinueBtn">
+                    <span>TAP TO CONTINUE</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- STAGE 5: Dedicated Heartfelt Message Showcase Stage -->
+        <section class="stage" id="stage5">
+            <div class="stage-content center-flex text-center">
+                <div class="glowing-message-card">
+                    <div class="card-shine-aura"></div>
+                    <i data-lucide="sparkles" class="glowing-card-sparkle"></i>
+                    <h2 class="script-header small">Straight From The Heart</h2>
+                    <p class="highlight-quote">
+                        "In a world full of temporary things, you are a sweet constant. Wishing you a birthday as bright and beautiful as your soul."
+                    </p>
+                    <div class="mini-heart-divider">❤️❤️❤️</div>
+                </div>
+
+                <div class="tap-continue-box margin-top-lg" id="stage5ContinueBtn">
+                    <span>TAP TO CONTINUE</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- STAGE 6: Interactive Realistic Envelope & High-Res Cake Reveal -->
+        <section class="stage" id="stage6">
+            <div class="stage-content center-flex text-center">
+                <div class="envelope-wrapper" id="envelopeWrapper">
+                    <div class="envelope" id="envelope">
+                        <div class="envelope-back"></div>
+                        <div class="letter-card" id="letterCard">
+                            <div class="cake-image-box">
+                                <img id="cakeImg" src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?q=80&w=800&auto=format&fit=crop" alt="Birthday Cake" class="cake-img">
+                                <div class="vector-cake-art" id="vectorCakeArt" style="display: none;">
+                                    <div class="vector-cake-layers">
+                                        <div class="cake-top-cherry">🍒</div>
+                                        <div class="cake-frosting">🎂</div>
+                                    </div>
+                                </div>
+                                <div class="animated-candle-flames">
+                                    <span class="flame flame1">🔥</span>
+                                    <span class="flame flame2">🔥</span>
+                                    <span class="flame flame3">🔥</span>
+                                </div>
+                            </div>
+                            <div class="letter-content">
+                                <h3>Happy Birthday! 🎂🎉</h3>
+                                <p>Here's a sweet cake made just for you! May all your dreams come true this year and every year to come.</p>
+                            </div>
+                        </div>
+                        <div class="envelope-top-flap"></div>
+                        <div class="envelope-pocket"></div>
+                        <div class="envelope-seal" id="envelopeSeal">
+                            <span>❤️</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="subtitle-text hint-text margin-top-sm" id="envelopeHint">Tap the envelope to unseal</p>
+
+                <div class="tap-continue-box margin-top-sm" id="envelopeContinueBtn" style="display: none;">
+                    <span>TAP TO CONTINUE</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- STAGE 7: Rotating Heart & Signature Card -->
+        <section class="stage" id="stage7">
+            <div class="stage-content center-flex text-center">
+                <div class="spinning-circle-wrapper">
+                    <div class="dashed-orbit"></div>
+                    <div class="spinning-heart">
+                        <svg viewBox="0 0 24 24" fill="currentColor" class="orbit-heart-svg">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <h2 class="hero-title small">HAPPY BIRTHDAY</h2>
+                <h3 class="recipient-subname">GHULAM DASTAGEER</h3>
+
+                <p class="final-quote-text">
+                    "You are someone who makes the world more beautiful just by being in it."
+                </p>
+
+                <p class="handwritten-signature">With love and warm wishes, Aaman</p>
+                <span class="date-badge">18 DECEMBER 2004</span>
+
+                <div class="tap-continue-box margin-top-md">
+                    <span>TAP TO CONTINUE</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- STAGE 8: Grand Finale Fireworks & Celebration -->
+        <section class="stage" id="stage8">
+            <div class="stage-content center-flex text-center">
+                <div class="finale-celebration-box">
+                    <h1 class="grand-birthday-text">Happy Birthday</h1>
+                    <p class="grand-subtext">Every moment with you is worth celebrating!</p>
+                    <p class="grand-signature">With all my love & best wishes</p>
+                    
+                    <button class="replay-btn" id="replayBtn">
+                        <i data-lucide="rotate-ccw"></i> REPLAY
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
