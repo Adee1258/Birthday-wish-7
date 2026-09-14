@@ -195,11 +195,65 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     // --------------------------------------------------------------------------
-    // Navigation & Stage Controller State
+    function playPopSound() {
+        try {
+            initAudio();
+            if (!audioCtx) return;
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(350, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(750, audioCtx.currentTime + 0.08);
+
+            gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
+
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.08);
+        } catch (e) {
+            // Ignore audio context errors gracefully
+        }
+    }
+
+    function triggerPopSparkles(x, y, color) {
+        const numParticles = 10;
+        for (let i = 0; i < numParticles; i++) {
+            const p = document.createElement('div');
+            p.className = 'pop-particle';
+            p.style.left = `${x}px`;
+            p.style.top = `${y}px`;
+            p.style.backgroundColor = color;
+            
+            const angle = (i / numParticles) * Math.PI * 2;
+            const distance = 35 + Math.random() * 30;
+            const dx = Math.cos(angle) * distance;
+            const dy = Math.sin(angle) * distance;
+            
+            p.style.setProperty('--dx', `${dx}px`);
+            p.style.setProperty('--dy', `${dy}px`);
+
+            document.body.appendChild(p);
+
+            setTimeout(() => {
+                p.remove();
+            }, 600);
+        }
+    }
+
     // --------------------------------------------------------------------------
-    let currentStageIndex = 0; // 0 to 7 (Stages 1 through 8)
+    // Navigation & Stage Controller State (9 Total Stages)
+    // --------------------------------------------------------------------------
+    let currentStageIndex = 0; // 0 to 8 (Stages 1 through 9)
     let currentMomentIndex = 0; // 0 to 14
-    const totalStages = 8;
+    const totalStages = 9;
 
     const transitionOverlay = document.getElementById('transitionOverlay');
     const dots = document.querySelectorAll('#progressDots .dot');
@@ -235,8 +289,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // Specific Stage Triggers
-            if (currentStageIndex === 7) {
+            // Specific Stage Triggers (Stage 9 Fireworks)
+            if (currentStageIndex === 8) {
                 startFireworks();
             } else {
                 stopFireworks();
@@ -250,24 +304,162 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --------------------------------------------------------------------------
-    // STAGE 1: Heart Tap Trigger
+    // STAGE 1: Random 5 Small Balloons Pop Logic
     // --------------------------------------------------------------------------
-    const stage1 = document.getElementById('stage1');
-    stage1.addEventListener('click', () => {
-        goToStage(1);
-    });
+    let poppedBalloonsCount = 0;
+    const totalBalloons = 5;
+    // Purple, pink, magenta shades matching the TikTok reference video
+    const balloonColors = ['#e040fb', '#ab47bc', '#ff4081', '#9c27b0', '#ec407a', '#d81b60'];
+    const balloonContainer = document.getElementById('balloonContainer');
+    const poppedCountText = document.getElementById('poppedCountText');
+    const balloonStatusText = document.getElementById('balloonStatusText');
+    const balloonSkipBtn = document.getElementById('balloonSkipBtn');
 
-    // STAGE 2: Hero Screen Tap Trigger
+    function createBalloonSVG(color, idx) {
+        return `<svg viewBox="0 0 65 95" width="50" height="80" style="width:50px; height:80px; display:block;">
+            <defs>
+                <radialGradient id="bgrad-${idx}" cx="35%" cy="30%" r="70%">
+                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+                    <stop offset="30%" stop-color="${color}"/>
+                    <stop offset="100%" stop-color="#2a0008"/>
+                </radialGradient>
+            </defs>
+            <!-- Balloon Body -->
+            <ellipse cx="32" cy="32" rx="24" ry="28" fill="url(#bgrad-${idx})"/>
+            <!-- Glossy Highlight Curve -->
+            <path d="M 20 18 A 13 15 0 0 1 32 9" stroke="rgba(255, 255, 255, 0.85)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <!-- Balloon Knot -->
+            <polygon points="32,60 27,67 37,67" fill="${color}"/>
+            <!-- Thin Curved String -->
+            <path d="M 32,67 Q 24,77 34,85 T 30,95" stroke="rgba(255, 255, 255, 0.65)" stroke-width="1.6" fill="none"/>
+        </svg>`;
+    }
+
+    function initBalloons() {
+        if (!balloonContainer) return;
+        balloonContainer.innerHTML = '';
+        poppedBalloonsCount = 0;
+        if (poppedCountText) poppedCountText.textContent = '0';
+        if (balloonStatusText) balloonStatusText.textContent = 'Pop them all 🎈';
+
+        // 5 distinct non-overlapping scattered positions across upper screen area
+        const basePositions = [
+            { left: 10, top: 6 },
+            { left: 68, top: 8 },
+            { left: 38, top: 26 },
+            { left: 14, top: 48 },
+            { left: 64, top: 44 }
+        ];
+
+        // Shuffle colors
+        const shuffledColors = [...balloonColors].sort(() => 0.5 - Math.random());
+
+        basePositions.forEach((pos, idx) => {
+            const balloon = document.createElement('div');
+            balloon.className = 'balloon';
+            const color = shuffledColors[idx % shuffledColors.length];
+            balloon.innerHTML = createBalloonSVG(color, idx);
+
+            // Enforce inline styles for sizing & positioning
+            balloon.style.position = 'absolute';
+            balloon.style.width = '50px';
+            balloon.style.height = '80px';
+            balloon.style.boxSizing = 'content-box';
+            balloon.style.cursor = 'pointer';
+            balloon.style.zIndex = '50';
+            balloon.style.pointerEvents = 'auto';
+
+            // Add slight random jitter (±3%)
+            const leftPct = Math.max(5, Math.min(78, pos.left + (Math.random() * 6 - 3)));
+            const topPct = Math.max(4, Math.min(55, pos.top + (Math.random() * 6 - 3)));
+
+            balloon.style.left = `${leftPct}%`;
+            balloon.style.top = `${topPct}%`;
+
+            // Random float animation timing
+            const delay = (Math.random() * 1.5).toFixed(2);
+            const duration = (2.4 + Math.random() * 1.4).toFixed(2);
+            balloon.style.animationDelay = `${delay}s`;
+            balloon.style.animationDuration = `${duration}s`;
+
+            function popThisBalloon(e) {
+                if (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+                if (balloon.dataset.popped) return;
+                balloon.dataset.popped = '1';
+
+                balloon.classList.add('popped');
+                playPopSound();
+
+                const rect = balloon.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                triggerPopSparkles(centerX, centerY, color);
+
+                poppedBalloonsCount++;
+                if (poppedCountText) poppedCountText.textContent = poppedBalloonsCount;
+
+                if (poppedBalloonsCount >= totalBalloons) {
+                    if (balloonStatusText) balloonStatusText.textContent = 'All Popped! 🎉';
+                    setTimeout(() => {
+                        goToStage(1); // Advance to Stage 2 (Heart Intro)
+                    }, 400);
+                }
+            }
+
+            // Multi-event handlers for instant popping on mouse, touch, or pointer!
+            ['pointerdown', 'touchstart', 'click'].forEach(evtType => {
+                balloon.addEventListener(evtType, popThisBalloon, { passive: false });
+            });
+
+            balloonContainer.appendChild(balloon);
+        });
+    }
+
+    if (balloonSkipBtn) {
+        balloonSkipBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (poppedBalloonsCount < totalBalloons) {
+                const unpopped = balloonContainer.querySelectorAll('.balloon:not(.popped)');
+                unpopped.forEach((b, i) => {
+                    setTimeout(() => {
+                        b.click();
+                    }, i * 100);
+                });
+            } else {
+                goToStage(1);
+            }
+        });
+    }
+
+    // Initialize balloons on load
+    initBalloons();
+
+    // --------------------------------------------------------------------------
+    // STAGE 2: Heart Tap Trigger
+    // --------------------------------------------------------------------------
     const stage2 = document.getElementById('stage2');
-    stage2.addEventListener('click', () => {
-        goToStage(2);
-        updateMomentView();
-    });
+    if (stage2) {
+        stage2.addEventListener('click', () => {
+            goToStage(2);
+        });
+    }
+
+    // STAGE 3: Hero Screen Tap Trigger
+    const stage3 = document.getElementById('stage3');
+    if (stage3) {
+        stage3.addEventListener('click', () => {
+            goToStage(3);
+            updateMomentView();
+        });
+    }
 
     // --------------------------------------------------------------------------
-    // STAGE 3: Memory Moments Slideshow Controller (With Smooth Long Flash Glow!)
+    // STAGE 4: Memory Moments Slideshow Controller
     // --------------------------------------------------------------------------
-    const stage3 = document.getElementById('stage3');
+    const stage4 = document.getElementById('stage4');
     const momentTag = document.getElementById('momentTag');
     const momentTitle = document.getElementById('momentTitle');
     const memoryPhoto = document.getElementById('memoryPhoto');
@@ -285,6 +477,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Build Slide Indicator Dots
     function buildSlideDots() {
+        if (!slideDotsContainer) return;
         slideDotsContainer.innerHTML = '';
         memoryMoments.forEach((_, idx) => {
             const sDot = document.createElement('span');
@@ -294,20 +487,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateMomentView() {
-        // Trigger Smooth Radial Red Glow Flash Wipe Effect on Photo Change!
         transitionOverlay.classList.add('flash');
 
-        // Smooth photo fade & scale animation
         if (memoryPhoto) {
             memoryPhoto.classList.remove('fade-in');
-            void memoryPhoto.offsetWidth; // Trigger CSS reflow
+            void memoryPhoto.offsetWidth;
             memoryPhoto.classList.add('fade-in');
         }
 
         setTimeout(() => {
             const moment = memoryMoments[currentMomentIndex];
-            momentTag.textContent = moment.tag;
-            momentTitle.textContent = moment.title;
+            if (momentTag) momentTag.textContent = moment.tag;
+            if (momentTitle) momentTitle.textContent = moment.title;
             
             if (memoryPhoto) {
                 memoryPhoto.style.display = 'block';
@@ -315,13 +506,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 memoryPhoto.src = moment.photo;
             }
             
-            momentCaption.textContent = moment.caption;
+            if (momentCaption) momentCaption.textContent = moment.caption;
             buildSlideDots();
 
-            if (currentMomentIndex === memoryMoments.length - 1) {
-                memoryTapText.textContent = "TAP TO CONTINUE";
-            } else {
-                memoryTapText.textContent = "TAP FOR NEXT MOMENT";
+            if (memoryTapText) {
+                if (currentMomentIndex === memoryMoments.length - 1) {
+                    memoryTapText.textContent = "TAP TO CONTINUE";
+                } else {
+                    memoryTapText.textContent = "TAP FOR NEXT MOMENT";
+                }
             }
         }, 250);
 
@@ -330,112 +523,135 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 550);
     }
 
-    stage3.addEventListener('click', () => {
-        if (currentMomentIndex < memoryMoments.length - 1) {
-            currentMomentIndex++;
-            updateMomentView();
-        } else {
-            goToStage(3); // Advance to Stage 4 (Cards)
-        }
-    });
+    if (stage4) {
+        stage4.addEventListener('click', () => {
+            if (currentMomentIndex < memoryMoments.length - 1) {
+                currentMomentIndex++;
+                updateMomentView();
+            } else {
+                goToStage(4); // Advance to Stage 5 (Cards)
+            }
+        });
+    }
 
     // --------------------------------------------------------------------------
-    // STAGE 4: Words From My Heart 2x2 Grid Cards Logic
+    // STAGE 5: Words From My Heart 2x2 Grid Cards Logic
     // --------------------------------------------------------------------------
     const revealCards = document.querySelectorAll('.reveal-card');
     const cardsContinueBtn = document.getElementById('cardsContinueBtn');
 
     revealCards.forEach(card => {
         card.addEventListener('click', (e) => {
-            e.stopPropagation(); // Don't trigger stage click
+            e.stopPropagation();
             card.classList.toggle('flipped');
             playSoftChime(700, 'sine');
         });
     });
 
-    cardsContinueBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        goToStage(4); // Advance to Stage 5 (Highlight Card)
-    });
+    if (cardsContinueBtn) {
+        cardsContinueBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            goToStage(5); // Advance to Stage 6 (Message)
+        });
+    }
 
-    const stage4 = document.getElementById('stage4');
-    stage4.addEventListener('click', () => {
-        goToStage(4);
-    });
-
-    // --------------------------------------------------------------------------
-    // STAGE 5: Highlight Card Stage Logic
-    // --------------------------------------------------------------------------
     const stage5 = document.getElementById('stage5');
+    if (stage5) {
+        stage5.addEventListener('click', () => {
+            goToStage(5);
+        });
+    }
+
+    // --------------------------------------------------------------------------
+    // STAGE 6: Dedicated Message Showcase Stage Logic
+    // --------------------------------------------------------------------------
+    const stage6 = document.getElementById('stage6');
     const stage5ContinueBtn = document.getElementById('stage5ContinueBtn');
     
-    stage5ContinueBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        goToStage(5); // Advance to Stage 6 (Envelope)
-    });
+    if (stage5ContinueBtn) {
+        stage5ContinueBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            goToStage(6); // Advance to Stage 7 (Envelope)
+        });
+    }
 
-    stage5.addEventListener('click', () => {
-        goToStage(5);
-    });
+    if (stage6) {
+        stage6.addEventListener('click', () => {
+            goToStage(6);
+        });
+    }
 
     // --------------------------------------------------------------------------
-    // STAGE 6: Envelope & Cake Unseal Logic
+    // STAGE 7: Envelope & Cake Unseal Logic
     // --------------------------------------------------------------------------
     const envelopeWrapper = document.getElementById('envelopeWrapper');
     const envelope = document.getElementById('envelope');
     const envelopeHint = document.getElementById('envelopeHint');
     const envelopeContinueBtn = document.getElementById('envelopeContinueBtn');
 
-    envelopeWrapper.addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (!envelope.classList.contains('open')) {
-            envelope.classList.add('open');
-            envelopeHint.textContent = "A sweet birthday message for you!";
-            envelopeContinueBtn.style.display = 'inline-flex';
-            playSoftChime(880, 'triangle');
-        }
-    });
+    if (envelopeWrapper) {
+        envelopeWrapper.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (envelope && !envelope.classList.contains('open')) {
+                envelope.classList.add('open');
+                if (envelopeHint) envelopeHint.textContent = "A sweet birthday message for you!";
+                if (envelopeContinueBtn) envelopeContinueBtn.style.display = 'inline-flex';
+                playSoftChime(880, 'triangle');
+            }
+        });
+    }
 
-    envelopeContinueBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        goToStage(6); // Advance to Stage 7 (Spinning Heart)
-    });
+    if (envelopeContinueBtn) {
+        envelopeContinueBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            goToStage(7); // Advance to Stage 8 (Signature)
+        });
+    }
 
-    const stage6 = document.getElementById('stage6');
-    stage6.addEventListener('click', () => {
-        if (envelope.classList.contains('open')) {
-            goToStage(6);
-        }
-    });
-
-    // --------------------------------------------------------------------------
-    // STAGE 7: Rotating Heart & Personal Signature Card Tap
-    // --------------------------------------------------------------------------
     const stage7 = document.getElementById('stage7');
-    stage7.addEventListener('click', () => {
-        goToStage(7); // Advance to Stage 8 (Fireworks)
-    });
+    if (stage7) {
+        stage7.addEventListener('click', () => {
+            if (envelope && envelope.classList.contains('open')) {
+                goToStage(7);
+            }
+        });
+    }
 
     // --------------------------------------------------------------------------
-    // STAGE 8: Replay Reset Trigger
+    // STAGE 8: Rotating Heart & Personal Signature Card Tap
+    // --------------------------------------------------------------------------
+    const stage8 = document.getElementById('stage8');
+    if (stage8) {
+        stage8.addEventListener('click', () => {
+            goToStage(8); // Advance to Stage 9 (Fireworks)
+        });
+    }
+
+    // --------------------------------------------------------------------------
+    // STAGE 9: Replay Reset Trigger
     // --------------------------------------------------------------------------
     const replayBtn = document.getElementById('replayBtn');
-    replayBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        // Reset envelope
-        envelope.classList.remove('open');
-        envelopeHint.textContent = "Tap the envelope to unseal";
-        envelopeContinueBtn.style.display = 'none';
+    if (replayBtn) {
+        replayBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            // Reset envelope
+            if (envelope) envelope.classList.remove('open');
+            if (envelopeHint) envelopeHint.textContent = "Tap the envelope to unseal";
+            if (envelopeContinueBtn) envelopeContinueBtn.style.display = 'none';
 
-        // Reset flipped cards
-        revealCards.forEach(c => c.classList.remove('flipped'));
+            // Reset flipped cards
+            revealCards.forEach(c => c.classList.remove('flipped'));
 
-        // Reset moment index
-        currentMomentIndex = 0;
+            // Reset moment index
+            currentMomentIndex = 0;
 
-        // Jump back to Stage 1
-        goToStage(0);
-    });
+            // Re-init 5 random balloons
+            initBalloons();
+
+            // Jump back to Stage 1 (Balloons)
+            goToStage(0);
+        });
+    }
 
 
     // ==========================================================================
