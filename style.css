@@ -1246,3 +1246,412 @@ body {
         text-shadow: 0 0 40px #ff758f, 0 0 15px #ffffff;
     }
 }
+
+/* --------------------------------------------------------------------------
+   STAGE 7: Envelope Letter (text-only, no cake image)
+   -------------------------------------------------------------------------- */
+.letter-inner-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 6px 4px;
+    height: 100%;
+}
+
+.letter-heart-icon {
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.letter-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: #800f2f;
+    font-weight: 700;
+    margin: 0;
+}
+
+.letter-body {
+    font-size: 0.72rem;
+    line-height: 1.45;
+    color: #4a0e17;
+    text-align: center;
+    padding: 0 4px;
+}
+
+.letter-divider {
+    font-size: 0.65rem;
+    letter-spacing: 6px;
+    color: #c9184a;
+    opacity: 0.7;
+}
+
+.letter-sub {
+    font-size: 0.68rem;
+    color: #6b1020;
+    text-align: center;
+    line-height: 1.5;
+}
+
+.letter-sub em {
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.2rem;
+    color: #c9184a;
+    font-style: normal;
+}
+
+/* --------------------------------------------------------------------------
+   STAGE 8: CSS Birthday Cake with Blowable Candles
+   -------------------------------------------------------------------------- */
+.cake-title-text {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3rem;
+    background: linear-gradient(135deg, #ffffff 0%, #ffd1dc 40%, #ff4d6d 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 2px 10px rgba(255, 77, 109, 0.7));
+    margin-bottom: 2px;
+    line-height: 1.1;
+}
+
+.cake-sub-text {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.75);
+    letter-spacing: 1px;
+    margin-bottom: 18px;
+    min-height: 1.2em;
+    transition: opacity 0.4s ease;
+}
+
+.candles-left-text {
+    font-size: 0.78rem;
+    color: rgba(255, 183, 3, 0.9);
+    letter-spacing: 1.5px;
+    margin-top: 14px;
+    min-height: 1.2em;
+    text-shadow: 0 0 8px rgba(255, 183, 3, 0.5);
+    transition: all 0.4s ease;
+}
+
+/* -- Cake wrapper -- */
+.css-cake-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 220px;
+    user-select: none;
+}
+
+/* -- Candles row sits above the top tier -- */
+.candles-row {
+    display: flex;
+    gap: 14px;
+    align-items: flex-end;
+    margin-bottom: -4px;
+    position: relative;
+    z-index: 5;
+}
+
+/* -- Single candle -- */
+.candle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+.candle-body {
+    width: 10px;
+    height: 34px;
+    border-radius: 3px 3px 2px 2px;
+    background: linear-gradient(180deg, #fff4c2 0%, #ffdf7e 40%, #ffc107 100%);
+    box-shadow: inset -2px 0 4px rgba(0, 0, 0, 0.15), 0 1px 4px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 2;
+}
+
+/* Alternating candle colours */
+.candle:nth-child(1) .candle-body {
+    background: linear-gradient(180deg, #fce4ec 0%, #f48fb1 50%, #e91e63 100%);
+}
+
+.candle:nth-child(2) .candle-body {
+    background: linear-gradient(180deg, #e8f5e9 0%, #a5d6a7 50%, #4caf50 100%);
+}
+
+.candle:nth-child(3) .candle-body {
+    background: linear-gradient(180deg, #fff9c4 0%, #fff176 50%, #fdd835 100%);
+}
+
+.candle:nth-child(4) .candle-body {
+    background: linear-gradient(180deg, #e3f2fd 0%, #90caf9 50%, #2196f3 100%);
+}
+
+.candle:nth-child(5) .candle-body {
+    background: linear-gradient(180deg, #f3e5f5 0%, #ce93d8 50%, #9c27b0 100%);
+}
+
+.candle-base {
+    width: 14px;
+    height: 5px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.35);
+    margin-top: -1px;
+    z-index: 2;
+}
+
+/* -- Flame -- */
+.flame-wrap {
+    position: relative;
+    width: 12px;
+    height: 22px;
+    margin-bottom: 2px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    z-index: 3;
+    transition: opacity 0.3s ease;
+}
+
+.flame-outer {
+    position: absolute;
+    bottom: 0;
+    width: 12px;
+    height: 20px;
+    background: radial-gradient(ellipse at 50% 85%, #ff9800 0%, #ff5722 40%, #ffeb3b 80%, transparent 100%);
+    border-radius: 50% 50% 30% 30% / 60% 60% 40% 40%;
+    animation: flameFlicker 0.5s ease-in-out infinite alternate;
+    filter: blur(0.5px);
+}
+
+.flame-inner {
+    position: absolute;
+    bottom: 2px;
+    width: 6px;
+    height: 11px;
+    background: radial-gradient(ellipse at 50% 80%, #fff9c4 0%, #ffeb3b 60%, transparent 100%);
+    border-radius: 50% 50% 30% 30% / 60% 60% 40% 40%;
+    animation: flameFlicker 0.4s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes flameFlicker {
+    0% {
+        transform: scaleX(1) scaleY(1) rotate(-2deg);
+        opacity: 0.95;
+    }
+
+    33% {
+        transform: scaleX(0.88) scaleY(1.06) rotate(1deg);
+        opacity: 1;
+    }
+
+    66% {
+        transform: scaleX(1.05) scaleY(0.94) rotate(-1deg);
+        opacity: 0.9;
+    }
+
+    100% {
+        transform: scaleX(0.92) scaleY(1.08) rotate(2deg);
+        opacity: 1;
+    }
+}
+
+/* -- Smoke puff (shows after blowing) -- */
+.smoke-puff {
+    position: absolute;
+    top: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(200, 200, 200, 0.0);
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Blown-out state */
+.candle.blown .flame-wrap {
+    opacity: 0;
+    transform: scale(0);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.candle.blown .smoke-puff {
+    animation: smokePuff 1.2s ease-out forwards;
+}
+
+@keyframes smokePuff {
+    0% {
+        transform: translateX(-50%) scale(0.5) translateY(0);
+        background: rgba(180, 180, 180, 0.8);
+        opacity: 0.9;
+    }
+
+    40% {
+        transform: translateX(-50%) scale(1.8) translateY(-12px);
+        background: rgba(160, 160, 160, 0.5);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: translateX(-50%) scale(2.8) translateY(-28px);
+        background: rgba(130, 130, 130, 0.0);
+        opacity: 0;
+    }
+}
+
+/* -- Cake tiers -- */
+.cake-tier {
+    position: relative;
+    border-radius: 8px 8px 4px 4px;
+    overflow: visible;
+    z-index: 2;
+}
+
+.cake-top {
+    width: 120px;
+    height: 44px;
+    background: linear-gradient(180deg, #fff0f5 0%, #ffc2d4 60%, #ff85a1 100%);
+    box-shadow: 0 3px 0 #e0607a, 0 4px 12px rgba(0, 0, 0, 0.25);
+    border-radius: 6px 6px 3px 3px;
+}
+
+.cake-middle {
+    width: 165px;
+    height: 52px;
+    background: linear-gradient(180deg, #fff3e0 0%, #ffcc80 55%, #ffa726 100%);
+    box-shadow: 0 3px 0 #e08020, 0 4px 14px rgba(0, 0, 0, 0.25);
+    margin-top: -2px;
+}
+
+.cake-bottom {
+    width: 210px;
+    height: 58px;
+    background: linear-gradient(180deg, #fce4ec 0%, #f48fb1 55%, #e91e63 100%);
+    box-shadow: 0 4px 0 #b5134d, 0 5px 18px rgba(0, 0, 0, 0.3);
+    margin-top: -2px;
+    border-radius: 4px 4px 6px 6px;
+}
+
+/* Frosting drips */
+.cake-frosting-drip {
+    position: absolute;
+    top: -6px;
+    left: 0;
+    right: 0;
+    height: 10px;
+    z-index: 3;
+}
+
+.cake-top-drip {
+    background: radial-gradient(ellipse 8px 10px at 12px 0, #ffffff 70%, transparent 71%),
+        radial-gradient(ellipse 8px 10px at 30px 0, #ffffff 70%, transparent 71%),
+        radial-gradient(ellipse 8px 10px at 50px 0, #ffffff 70%, transparent 71%),
+        radial-gradient(ellipse 8px 10px at 70px 0, #ffffff 70%, transparent 71%),
+        radial-gradient(ellipse 8px 10px at 90px 0, #ffffff 70%, transparent 71%),
+        radial-gradient(ellipse 8px 10px at 110px 0, #ffffff 70%, transparent 71%);
+    opacity: 0.9;
+}
+
+.cake-mid-drip {
+    background: radial-gradient(ellipse 9px 10px at 10px 0, #fff8e1 70%, transparent 71%),
+        radial-gradient(ellipse 9px 10px at 28px 0, #fff8e1 70%, transparent 71%),
+        radial-gradient(ellipse 9px 10px at 50px 0, #fff8e1 70%, transparent 71%),
+        radial-gradient(ellipse 9px 10px at 72px 0, #fff8e1 70%, transparent 71%),
+        radial-gradient(ellipse 9px 10px at 95px 0, #fff8e1 70%, transparent 71%),
+        radial-gradient(ellipse 9px 10px at 118px 0, #fff8e1 70%, transparent 71%),
+        radial-gradient(ellipse 9px 10px at 140px 0, #fff8e1 70%, transparent 71%);
+    opacity: 0.85;
+}
+
+.cake-bot-drip {
+    background: radial-gradient(ellipse 9px 10px at 10px 0, #fce4ec 70%, transparent 71%),
+        radial-gradient(ellipse 9px 10px at 32px 0, #fce4ec 70%, transparent 71%),
+        radial-gradient(ellipse 9px 10px at 56px 0, #fce4ec 70%, transparent 71%),
+        radial-gradient(ellipse 9px 10px at 80px 0, #fce4ec 70%, transparent 71%),
+        radial-gradient(ellipse 9px 10px at 104px 0, #fce4ec 70%, transparent 71%),
+        radial-gradient(ellipse 9px 10px at 128px 0, #fce4ec 70%, transparent 71%),
+        radial-gradient(ellipse 9px 10px at 152px 0, #fce4ec 70%, transparent 71%),
+        radial-gradient(ellipse 9px 10px at 176px 0, #fce4ec 70%, transparent 71%);
+    opacity: 0.9;
+}
+
+/* Cake decoration dots */
+.cake-decoration {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    height: 100%;
+}
+
+.cake-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+}
+
+.cake-top .cake-dot {
+    background: rgba(255, 77, 109, 0.6);
+    width: 6px;
+    height: 6px;
+}
+
+.cake-middle .cake-dot {
+    background: rgba(255, 140, 0, 0.65);
+}
+
+.cake-bottom .cake-dot {
+    background: rgba(255, 255, 255, 0.75);
+    width: 8px;
+    height: 8px;
+}
+
+/* Cake plate */
+.cake-plate {
+    width: 240px;
+    height: 14px;
+    background: linear-gradient(180deg, #ffffff 0%, #e0e0e0 100%);
+    border-radius: 50%;
+    margin-top: -1px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+    z-index: 1;
+}
+
+/* All-blown celebratory glow on cake */
+.css-cake-wrapper.all-blown {
+    animation: cakeCelebrate 0.6s ease-out;
+    filter: drop-shadow(0 0 20px rgba(255, 183, 3, 0.8));
+}
+
+@keyframes cakeCelebrate {
+    0% {
+        transform: scale(1);
+    }
+
+    25% {
+        transform: scale(1.06) rotate(-1deg);
+    }
+
+    50% {
+        transform: scale(1.1) rotate(1deg);
+    }
+
+    75% {
+        transform: scale(1.05) rotate(-0.5deg);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}

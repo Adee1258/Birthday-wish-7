@@ -80,25 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('click', triggerHeartRipple);
 
     // --------------------------------------------------------------------------
-    // High-Res Image & Fallback Handling for Cake Image
-    // --------------------------------------------------------------------------
-    const cakeImg = document.getElementById('cakeImg');
-    const vectorCakeArt = document.getElementById('vectorCakeArt');
-
-    if (cakeImg) {
-        cakeImg.onerror = () => {
-            cakeImg.style.display = 'none';
-            if (vectorCakeArt) vectorCakeArt.style.display = 'flex';
-        };
-        setTimeout(() => {
-            if (!cakeImg.complete || cakeImg.naturalWidth === 0) {
-                cakeImg.style.display = 'none';
-                if (vectorCakeArt) vectorCakeArt.style.display = 'flex';
-            }
-        }, 2000);
-    }
-
-    // --------------------------------------------------------------------------
     // 15 Photo Memory Moments Data Array
     // --------------------------------------------------------------------------
     const memoryMoments = [
@@ -249,11 +230,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --------------------------------------------------------------------------
-    // Navigation & Stage Controller State (9 Total Stages)
+    // Navigation & Stage Controller State (10 Total Stages)
     // --------------------------------------------------------------------------
-    let currentStageIndex = 0; // 0 to 8 (Stages 1 through 9)
+    let currentStageIndex = 0; // 0 to 9 (Stages 1 through 10)
     let currentMomentIndex = 0; // 0 to 14
-    const totalStages = 9;
+    const totalStages = 10;
 
     const transitionOverlay = document.getElementById('transitionOverlay');
     const dots = document.querySelectorAll('#progressDots .dot');
@@ -289,11 +270,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // Specific Stage Triggers (Stage 9 Fireworks)
-            if (currentStageIndex === 8) {
+            // Specific Stage Triggers (Stage 10 Fireworks)
+            if (currentStageIndex === 9) {
                 startFireworks();
             } else {
                 stopFireworks();
+            }
+
+            // Reset cake candles when entering cake stage (stage index 7)
+            if (currentStageIndex === 7) {
+                initCakeCandles();
             }
 
             setTimeout(() => {
@@ -604,7 +590,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (envelopeContinueBtn) {
         envelopeContinueBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            goToStage(7); // Advance to Stage 8 (Signature)
+            goToStage(7); // Advance to Stage 8 (Cake)
         });
     }
 
@@ -618,17 +604,111 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --------------------------------------------------------------------------
-    // STAGE 8: Rotating Heart & Personal Signature Card Tap
+    // STAGE 8: Interactive Cake — Blow the Candles!
     // --------------------------------------------------------------------------
-    const stage8 = document.getElementById('stage8');
-    if (stage8) {
-        stage8.addEventListener('click', () => {
-            goToStage(8); // Advance to Stage 9 (Fireworks)
+    const candlesRow = document.getElementById('candlesRow');
+    const cakeHintText = document.getElementById('cakeHintText');
+    const candlesLeftText = document.getElementById('candlesLeftText');
+    const cakeTotalCandles = 5;
+    let blownCount = 0;
+
+    function playBlowSound() {
+        try {
+            initAudio();
+            if (!audioCtx) return;
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            // Soft "whoosh" sound
+            const bufferSize = audioCtx.sampleRate * 0.18;
+            const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+            const data = buffer.getChannelData(0);
+            for (let i = 0; i < bufferSize; i++) {
+                data[i] = (Math.random() * 2 - 1) * (1 - i / bufferSize);
+            }
+            const source = audioCtx.createBufferSource();
+            source.buffer = buffer;
+            const filter = audioCtx.createBiquadFilter();
+            filter.type = 'bandpass';
+            filter.frequency.value = 1200;
+            filter.Q.value = 0.5;
+            const gain = audioCtx.createGain();
+            gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.18);
+            source.connect(filter);
+            filter.connect(gain);
+            gain.connect(audioCtx.destination);
+            source.start();
+        } catch (e) { /* ignore */ }
+    }
+
+    function initCakeCandles() {
+        blownCount = 0;
+        if (candlesLeftText) candlesLeftText.textContent = `${cakeTotalCandles} candles left ✨`;
+        if (cakeHintText) {
+            cakeHintText.textContent = 'Tap each candle to blow it out 🌬️';
+            cakeHintText.style.opacity = '1';
+        }
+        // Reset all candles to unblown state
+        if (candlesRow) {
+            candlesRow.querySelectorAll('.candle').forEach(c => {
+                c.classList.remove('blown');
+                c.dataset.blown = '';
+            });
+            const cakeWrapper = document.querySelector('.css-cake-wrapper');
+            if (cakeWrapper) cakeWrapper.classList.remove('all-blown');
+        }
+    }
+
+    if (candlesRow) {
+        candlesRow.querySelectorAll('.candle').forEach(candle => {
+            ['pointerdown', 'touchstart', 'click'].forEach(evtType => {
+                candle.addEventListener(evtType, (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (candle.dataset.blown) return;
+                    candle.dataset.blown = '1';
+                    candle.classList.add('blown');
+                    playBlowSound();
+                    blownCount++;
+
+                    const remaining = cakeTotalCandles - blownCount;
+                    if (candlesLeftText) {
+                        if (remaining > 0) {
+                            candlesLeftText.textContent = `${remaining} candle${remaining > 1 ? 's' : ''} left ✨`;
+                        } else {
+                            candlesLeftText.textContent = 'Wish granted! 🎉';
+                        }
+                    }
+
+                    if (blownCount >= cakeTotalCandles) {
+                        // All candles blown!
+                        const cakeWrapper = document.querySelector('.css-cake-wrapper');
+                        if (cakeWrapper) cakeWrapper.classList.add('all-blown');
+                        if (cakeHintText) cakeHintText.textContent = 'Your wish is on its way! 💫';
+                        playSoftChime(880, 'sine');
+                        setTimeout(() => playSoftChime(1046, 'sine'), 200);
+                        setTimeout(() => playSoftChime(1318, 'sine'), 400);
+                        // Advance after a short celebration
+                        setTimeout(() => {
+                            goToStage(8); // Go to Stage 9 (Signature)
+                        }, 1400);
+                    }
+                }, { passive: false });
+            });
         });
     }
 
     // --------------------------------------------------------------------------
-    // STAGE 9: Replay Reset Trigger
+    // STAGE 9: Rotating Heart & Signature Tap
+    // --------------------------------------------------------------------------
+    const stage9 = document.getElementById('stage9');
+    if (stage9) {
+        stage9.addEventListener('click', () => {
+            goToStage(9); // Advance to Stage 10 (Fireworks)
+        });
+    }
+
+    // --------------------------------------------------------------------------
+    // STAGE 10: Replay Reset Trigger
     // --------------------------------------------------------------------------
     const replayBtn = document.getElementById('replayBtn');
     if (replayBtn) {
@@ -644,6 +724,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Reset moment index
             currentMomentIndex = 0;
+
+            // Reset cake candles
+            initCakeCandles();
 
             // Re-init 5 random balloons
             initBalloons();
