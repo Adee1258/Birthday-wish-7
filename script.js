@@ -187,6 +187,13 @@ document.addEventListener('DOMContentLoaded', () => {
             photo: "assets/WhatsApp Image 2026-09-15 at 10.56.33 AM.jpeg",
             caption: "تم سے محبت ایسا خواب ہے\nجس سے میرا دل کبھی جاگنا نہیں چاہتا۔ ❤️",
             isUrdu: true
+        },
+        {
+            tag: "MOMENT SIXTEEN",
+            title: "Always & Forever",
+            photo: "assets/WhatsApp Image 2026-09-15 at 10.56.34 AM.jpeg",
+            caption: "تم میری زندگی کی سب سے خوبصورت یاد ہو،\nجو ہر لمحے میرے دل میں زندہ رہے گی۔ 🤍✨",
+            isUrdu: true
         }
     ];
 
