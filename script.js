@@ -86,92 +86,107 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             tag: "MOMENT ONE",
             title: "A Moment Worth Remembering",
-            photo: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?q=80&w=800&auto=format&fit=crop",
+            photo: "assets/ChatGPT Image Sep 15, 2026, 11_14_19 AM.png",
             caption: "Every time you smile, the world feels a little brighter."
         },
         {
             tag: "MOMENT TWO",
             title: "Your Beautiful Smile",
-            photo: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=800&auto=format&fit=crop",
+            photo: "assets/ChatGPT Image Sep 15, 2026, 11_14_35 AM.png",
             caption: "Your laughter has a gentle magic that turns ordinary days into sweet memories."
         },
         {
             tag: "MOMENT THREE",
             title: "Precious Conversations",
-            photo: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=800&auto=format&fit=crop",
+            photo: "assets/ChatGPT Image Sep 15, 2026, 11_14_50 AM.png",
             caption: "Late night talks and silent understandings that mean more than words."
         },
         {
             tag: "MOMENT FOUR",
             title: "Midnight Laughter",
-            photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop",
-            caption: "Finding joy in the simplest little things whenever you are near."
+            photo: "assets/picgd1.jpeg",
+            caption: "محترم! 🤍\nجب آپ کے پاس کچھ بھی نہ رہے،\nتب بھی یقین رکھنا، محبت آپ کی رہے گی۔ 🫶🏻✨",
+            isUrdu: true
         },
         {
             tag: "MOMENT FIVE",
             title: "Unforgettable Days",
-            photo: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=800&auto=format&fit=crop",
-            caption: "Some days become permanent treasures in the heart because of you."
+            photo: "assets/picgd2.jpeg",
+            caption: "پیدائش سے پہلے میری خوشیاں رکھی گئی جہاں میں 🤍\nیعنی کہ محترم بڑے ہیں مجھ سے ✨",
+            isUrdu: true
         },
         {
             tag: "MOMENT SIX",
             title: "Pure Sunshine",
-            photo: "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=800&auto=format&fit=crop",
-            caption: "You bring a warmth that lights up even the darkest skies."
+            photo: "assets/WhatsApp Image 2026-09-15 at 10.56.15 AM.jpeg",
+            caption: "تیری آنکھوں میں وہ دنیا ملی،\nجہاں سے دل کہیں جانا نہیں چاہتا۔ ❤️",
+            objectPosition: "top",
+            isUrdu: true
         },
         {
             tag: "MOMENT SEVEN",
             title: "Little Sweet Things",
-            photo: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=800&auto=format&fit=crop",
-            caption: "It is your kindness and gentle soul that makes you so deeply special."
+            photo: "assets/WhatsApp Image 2026-09-15 at 10.56.17 AM.jpeg",
+            caption: "تم وہ شعر ہو جسے میرا دل ہر روز لکھتا ہے۔ ✨",
+            isUrdu: true
         },
         {
             tag: "MOMENT EIGHT",
             title: "Warmest Hugs",
-            photo: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=800&auto=format&fit=crop",
-            caption: "A comfort that feels like coming home every single time."
+            photo: "assets/WhatsApp Image 2026-09-15 at 10.56.19 AM.jpeg",
+            caption: "اگر محبت کا کوئی چہرہ ہوتا،\nتو ہر خواب میں تیرا ہوتا۔ ❤️",
+            objectPosition: "top",
+            isUrdu: true
         },
         {
             tag: "MOMENT NINE",
             title: "Unfiltered Joy",
-            photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop",
-            caption: "Seeing you happy is one of the greatest pleasures of life."
+            photo: "assets/WhatsApp Image 2026-09-15 at 10.56.23 AM.jpeg",
+            caption: "محبت کو سمجھنے سے پہلے ہی\nمیرے دل نے تمہیں چُن لیا تھا۔ 🫶",
+            isUrdu: true
         },
         {
             tag: "MOMENT TEN",
             title: "A Golden Memory",
-            photo: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?q=80&w=800&auto=format&fit=crop",
-            caption: "Time spent with you always feels like a golden sunset."
+            photo: "assets/WhatsApp Image 2026-09-15 at 10.56.25 AM.jpeg",
+            caption: "ہزاروں چہروں میں بھی\nمیرا دل صرف تمہیں ڈھونڈتا ہے۔ ❤️",
+            isUrdu: true
         },
         {
             tag: "MOMENT ELEVEN",
             title: "Serene Moments",
-            photo: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=800&auto=format&fit=crop",
-            caption: "Quiet peace and happiness that flows naturally when we talk."
+            photo: "assets/WhatsApp Image 2026-09-15 at 10.56.26 AM.jpeg",
+            caption: "تم نے میری عام سی زندگی کو شاعری بنا دیا۔ 🌸",
+            isUrdu: true
         },
         {
             tag: "MOMENT TWELVE",
             title: "Endless Smiles",
-            photo: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?q=80&w=800&auto=format&fit=crop",
-            caption: "May your life forever be filled with reasons to keep smiling."
+            photo: "assets/WhatsApp Image 2026-09-15 at 10.56.30 AM.jpeg",
+            caption: "تمہارا نام میرے دل پر لکھی\nایک خوبصورت غزل سا لگتا ہے۔ ✨",
+            isUrdu: true
         },
         {
             tag: "MOMENT THIRTEEN",
             title: "Special Bond",
-            photo: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=800&auto=format&fit=crop",
-            caption: "A connection built on true respect, warmth, and care."
+            photo: "assets/WhatsApp Image 2026-09-15 at 10.56.31 AM.jpeg",
+            caption: "تمہاری قربت میں مجھے\nاپنی ہمیشہ کی خوشی مل گئی۔ ❤️",
+            objectPosition: "top",
+            isUrdu: true
         },
         {
             tag: "MOMENT FOURTEEN",
             title: "Heartwarming Days",
-            photo: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=800&auto=format&fit=crop",
-            caption: "Thank you for being the amazing person that you are."
+            photo: "assets/WhatsApp Image 2026-09-15 at 10.56.32 AM.jpeg",
+            caption: "تم وہ حسین خیال ہو\nجس سے میرا دل کبھی نہیں تھکتا۔ 🫶",
+            isUrdu: true
         },
         {
             tag: "MOMENT FIFTEEN",
             title: "Forever Cherished",
-            photo: "https://images.unsplash.com/photo-1464746133101-a2c3f88e0dd9?q=80&w=800&auto=format&fit=crop",
-            caption: "Wishing you a birthday as wonderful and unforgettable as you are."
+            photo: "assets/WhatsApp Image 2026-09-15 at 10.56.33 AM.jpeg",
+            caption: "تم سے محبت ایسا خواب ہے\nجس سے میرا دل کبھی جاگنا نہیں چاہتا۔ ❤️",
+            isUrdu: true
         }
     ];
 
@@ -490,9 +505,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 memoryPhoto.style.display = 'block';
                 if (photoFallbackArt) photoFallbackArt.style.display = 'none';
                 memoryPhoto.src = moment.photo;
+                memoryPhoto.style.objectPosition = moment.objectPosition || 'center';
             }
             
-            if (momentCaption) momentCaption.textContent = moment.caption;
+            if (momentCaption) {
+                momentCaption.textContent = moment.caption;
+                if (moment.isUrdu) {
+                    momentCaption.classList.add('urdu');
+                } else {
+                    momentCaption.classList.remove('urdu');
+                }
+            }
             buildSlideDots();
 
             if (memoryTapText) {
