@@ -106,6 +106,8 @@ document.addEventListener('DOMContentLoaded', () => {
             title: "Midnight Laughter",
             photo: "assets/picgd1.jpeg",
             caption: "محترم! 🤍\nجب آپ کے پاس کچھ بھی نہ رہے،\nتب بھی یقین رکھنا، محبت آپ کی رہے گی۔ 🫶🏻✨",
+            objectFit: "contain",
+            objectPosition: "center",
             isUrdu: true
         },
         {
@@ -513,6 +515,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 memoryPhoto.style.display = 'block';
                 if (photoFallbackArt) photoFallbackArt.style.display = 'none';
                 memoryPhoto.src = moment.photo;
+                memoryPhoto.style.objectFit = moment.objectFit || 'cover';
                 memoryPhoto.style.objectPosition = moment.objectPosition || 'center';
             }
             
