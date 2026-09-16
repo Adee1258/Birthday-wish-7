@@ -548,10 +548,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 // fullFrame: frame ki height barhao taake poori pic aaye
                 const photoFrame = document.querySelector('.glowing-photo-frame');
                 if (photoFrame) {
-                    // Always use full frame to show pic in full size without cropping
+                    // Responsive frame: shrinks on small screens so caption stays visible
                     photoFrame.style.width = '100%';
                     photoFrame.style.maxWidth = '340px';
-                    photoFrame.style.height = '420px';
+                    photoFrame.style.height = 'clamp(200px, calc(100vh - 340px), 420px)';
                 }
             }
             

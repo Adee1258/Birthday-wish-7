@@ -106,7 +106,7 @@ body {
     width: 100%;
     max-width: 440px;
     height: 100vh;
-    max-height: 900px;
+    height: 100dvh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -159,6 +159,8 @@ body {
     transform: scale(0.96);
     padding: 60px 20px 30px;
     pointer-events: none;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .stage.active {
@@ -625,7 +627,7 @@ body {
 .glowing-photo-frame {
     position: relative;
     width: 250px;
-    height: 360px;
+    height: clamp(200px, calc(100vh - 340px), 420px);
     border-radius: 18px;
     padding: 6px;
     background: linear-gradient(135deg, rgba(255, 77, 109, 0.6), rgba(255, 117, 143, 0.2));
@@ -1696,8 +1698,46 @@ body {
     .name-display {
         font-size: 1.5rem;
     }
+    .moment-headline {
+        font-size: 1.6rem;
+        margin-bottom: 10px;
+    }
+    .moment-caption {
+        font-size: 0.85rem;
+    }
+}
+
+/* --- Very small height phones (under 700px viewport height) --- */
+@media (max-height: 700px) {
+    .moment-headline {
+        font-size: 1.5rem;
+        margin-bottom: 8px;
+    }
+    .moment-caption {
+        font-size: 0.82rem;
+        min-height: 36px;
+        margin-bottom: 6px;
+    }
+    .stage {
+        padding: 40px 16px 20px;
+    }
     .glowing-photo-frame {
-        width: 100%;
-        height: 380px;
+        margin-bottom: 10px;
+    }
+}
+
+/* --- Extra small height phones (under 600px viewport height) --- */
+@media (max-height: 600px) {
+    .moment-headline {
+        font-size: 1.3rem;
+        margin-bottom: 6px;
+    }
+    .moment-caption {
+        font-size: 0.78rem;
+        min-height: 30px;
+        margin-bottom: 4px;
+    }
+    .stage {
+        padding: 30px 14px 16px;
     }
 }
