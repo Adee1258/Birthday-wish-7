@@ -122,7 +122,9 @@ document.addEventListener('DOMContentLoaded', () => {
             title: "Pure Sunshine",
             photo: "assets/WhatsApp Image 2026-09-15 at 10.56.15 AM.jpeg",
             caption: "تیری آنکھوں میں وہ دنیا ملی،\nجہاں سے دل کہیں جانا نہیں چاہتا۔ ❤️",
-            objectPosition: "top",
+            objectFit: "contain",
+            objectPosition: "center",
+            fullFrame: true,
             isUrdu: true
         },
         {
@@ -517,6 +519,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 memoryPhoto.src = moment.photo;
                 memoryPhoto.style.objectFit = moment.objectFit || 'cover';
                 memoryPhoto.style.objectPosition = moment.objectPosition || 'center';
+
+                // fullFrame: frame ki height barhao taake poori pic aaye
+                const photoFrame = document.querySelector('.glowing-photo-frame');
+                if (photoFrame) {
+                    if (moment.fullFrame) {
+                        photoFrame.style.width = '90vw';
+                        photoFrame.style.maxWidth = '340px';
+                        photoFrame.style.height = '420px';
+                    } else {
+                        photoFrame.style.width = '250px';
+                        photoFrame.style.maxWidth = '250px';
+                        photoFrame.style.height = '310px';
+                    }
+                }
             }
             
             if (momentCaption) {
