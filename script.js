@@ -128,6 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
             title: "Little Sweet Things",
             photo: "assets/WhatsApp Image 2026-09-15 at 10.56.17 AM.jpeg",
             caption: "تم وہ شعر ہو جسے میرا دل ہر روز لکھتا ہے۔ ✨",
+            objectPosition: "top",
             isUrdu: true
         },
         {
