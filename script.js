@@ -206,7 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
             tag: "MOMENT EIGHTEEN",
             title: "Midnight Laughter",
             photo: "assets/picgd1.jpeg",
-            caption: "محترم! 🤍\nجب آپ کے پاس کچھ بھی نہ رہے،\nتب بھی یقین رکھنا، محبت آپ کی رہے گی۔ 🫶🏻✨",
+            caption: "محترم! 🤍\nجب آپ کے پاس کچھ نہ رہے\nتب بھی یقین رکھنا، محترمہ آپ کی رہے گی۔ 🕊️🥺❤️",
             objectFit: "contain",
             objectPosition: "center",
             isUrdu: true
@@ -549,7 +549,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const photoFrame = document.querySelector('.glowing-photo-frame');
                 if (photoFrame) {
                     // Always use full frame to show pic in full size without cropping
-                    photoFrame.style.width = '90vw';
+                    photoFrame.style.width = '100%';
                     photoFrame.style.maxWidth = '340px';
                     photoFrame.style.height = '420px';
                 }
