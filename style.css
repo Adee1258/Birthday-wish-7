@@ -625,7 +625,7 @@ body {
 .glowing-photo-frame {
     position: relative;
     width: 250px;
-    height: 310px;
+    height: 360px;
     border-radius: 18px;
     padding: 6px;
     background: linear-gradient(135deg, rgba(255, 77, 109, 0.6), rgba(255, 117, 143, 0.2));
@@ -952,7 +952,7 @@ body {
     bottom: 5px;
     left: 10px;
     right: 10px;
-    height: 310px;
+    height: 360px;
     background: #ffffff;
     color: #2b040a;
     border-radius: 10px;
@@ -964,14 +964,14 @@ body {
     align-items: center;
     gap: 6px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    transform: translateY(15px) scale(0.92);
+    transform: translateY(60px) scale(0.85);
     opacity: 0;
     pointer-events: none;
     overflow: hidden;
 }
 
 .envelope.open .letter-card {
-    transform: translateY(-200px) scale(1);
+    transform: translateY(-190px) scale(1.22);
     opacity: 1;
     z-index: 10;
     pointer-events: auto;
@@ -1305,11 +1305,12 @@ body {
     font-style: italic;
     direction: ltr;
     overflow-y: auto;
-    max-height: 160px;
+    max-height: 280px;
+    font-size: 0.68rem;
 }
 
 .letter-divider {
-    font-size: 0.65rem;
+    font-size: 0.68rem;
     letter-spacing: 6px;
     color: #c9184a;
     opacity: 0.7;
