@@ -624,8 +624,8 @@ body {
 
 .glowing-photo-frame {
     position: relative;
-    width: 250px;
-    height: 310px;
+    width: 260px;
+    height: auto;
     border-radius: 18px;
     padding: 6px;
     background: linear-gradient(135deg, rgba(255, 77, 109, 0.6), rgba(255, 117, 143, 0.2));
@@ -650,7 +650,7 @@ body {
 .photo-container {
     position: relative;
     width: 100%;
-    height: 100%;
+    height: auto;
     border-radius: 14px;
     overflow: hidden;
     z-index: 2;
@@ -662,8 +662,10 @@ body {
 
 .photo-container img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
+    max-width: 100%;
+    object-fit: contain;
+    display: block;
     transition: transform 0.8s ease, opacity 0.8s ease;
 }
 
