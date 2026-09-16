@@ -218,6 +218,13 @@ document.addEventListener('DOMContentLoaded', () => {
             caption: "پیدائش سے پہلے میری خوشیاں رکھی گئی جہاں میں 🤍\nیعنی کہ محترم بڑے ہیں مجھ سے ✨",
             isUrdu: true
         }
+        ,{
+            tag: "MOMENT TWENTY",
+            title: "Beautiful Journey",
+            photo: "assets/last.jpeg",
+            caption: "محبت کی آخری منزل بھی تم ہو،\nمیری ہر دعا کا حاصل بھی تم ہو۔ ✨",
+            isUrdu: true
+        }
     ];
 
     // --------------------------------------------------------------------------
