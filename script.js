@@ -86,39 +86,41 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             tag: "MOMENT ONE",
             title: "A Moment Worth Remembering",
-            photo: "assets/ChatGPT Image Sep 15, 2026, 11_14_19 AM.png",
+            photo: "assets/01.jpeg",
             caption: "Every time you smile, the world feels a little brighter."
         },
         {
             tag: "MOMENT TWO",
             title: "Your Beautiful Smile",
-            photo: "assets/ChatGPT Image Sep 15, 2026, 11_14_35 AM.png",
+            photo: "assets/02.jpeg",
             caption: "Your laughter has a gentle magic that turns ordinary days into sweet memories."
         },
         {
             tag: "MOMENT THREE",
             title: "Precious Conversations",
-            photo: "assets/ChatGPT Image Sep 15, 2026, 11_14_50 AM.png",
+            photo: "assets/03.jpeg",
             caption: "Late night talks and silent understandings that mean more than words."
         },
         {
             tag: "MOMENT FOUR",
-            title: "Midnight Laughter",
-            photo: "assets/picgd1.jpeg",
-            caption: "محترم! 🤍\nجب آپ کے پاس کچھ بھی نہ رہے،\nتب بھی یقین رکھنا، محبت آپ کی رہے گی۔ 🫶🏻✨",
-            objectFit: "contain",
-            objectPosition: "center",
-            isUrdu: true
+            title: "A Moment Worth Remembering",
+            photo: "assets/ChatGPT Image Sep 15, 2026, 11_14_19 AM.png",
+            caption: "Every time you smile, the world feels a little brighter."
         },
         {
             tag: "MOMENT FIVE",
-            title: "Unforgettable Days",
-            photo: "assets/picgd2.jpeg",
-            caption: "پیدائش سے پہلے میری خوشیاں رکھی گئی جہاں میں 🤍\nیعنی کہ محترم بڑے ہیں مجھ سے ✨",
-            isUrdu: true
+            title: "Your Beautiful Smile",
+            photo: "assets/ChatGPT Image Sep 15, 2026, 11_14_35 AM.png",
+            caption: "Your laughter has a gentle magic that turns ordinary days into sweet memories."
         },
         {
             tag: "MOMENT SIX",
+            title: "Precious Conversations",
+            photo: "assets/ChatGPT Image Sep 15, 2026, 11_14_50 AM.png",
+            caption: "Late night talks and silent understandings that mean more than words."
+        },
+        {
+            tag: "MOMENT SEVEN",
             title: "Pure Sunshine",
             photo: "assets/WhatsApp Image 2026-09-15 at 10.56.15 AM.jpeg",
             caption: "تیری آنکھوں میں وہ دنیا ملی،\nجہاں سے دل کہیں جانا نہیں چاہتا۔ ❤️",
@@ -128,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
             isUrdu: true
         },
         {
-            tag: "MOMENT SEVEN",
+            tag: "MOMENT EIGHT",
             title: "Little Sweet Things",
             photo: "assets/WhatsApp Image 2026-09-15 at 10.56.17 AM.jpeg",
             caption: "تم وہ شعر ہو جسے میرا دل ہر روز لکھتا ہے۔ ✨",
@@ -136,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
             isUrdu: true
         },
         {
-            tag: "MOMENT EIGHT",
+            tag: "MOMENT NINE",
             title: "Warmest Hugs",
             photo: "assets/WhatsApp Image 2026-09-15 at 10.56.19 AM.jpeg",
             caption: "اگر محبت کا کوئی چہرہ ہوتا،\nتو ہر خواب میں تیرا ہوتا۔ ❤️",
@@ -144,35 +146,35 @@ document.addEventListener('DOMContentLoaded', () => {
             isUrdu: true
         },
         {
-            tag: "MOMENT NINE",
+            tag: "MOMENT TEN",
             title: "Unfiltered Joy",
             photo: "assets/WhatsApp Image 2026-09-15 at 10.56.23 AM.jpeg",
             caption: "محبت کو سمجھنے سے پہلے ہی\nمیرے دل نے تمہیں چُن لیا تھا۔ 🫶",
             isUrdu: true
         },
         {
-            tag: "MOMENT TEN",
+            tag: "MOMENT ELEVEN",
             title: "A Golden Memory",
             photo: "assets/WhatsApp Image 2026-09-15 at 10.56.25 AM.jpeg",
             caption: "ہزاروں چہروں میں بھی\nمیرا دل صرف تمہیں ڈھونڈتا ہے۔ ❤️",
             isUrdu: true
         },
         {
-            tag: "MOMENT ELEVEN",
+            tag: "MOMENT TWELVE",
             title: "Serene Moments",
             photo: "assets/WhatsApp Image 2026-09-15 at 10.56.26 AM.jpeg",
             caption: "تم نے میری عام سی زندگی کو شاعری بنا دیا۔ 🌸",
             isUrdu: true
         },
         {
-            tag: "MOMENT TWELVE",
+            tag: "MOMENT THIRTEEN",
             title: "Endless Smiles",
             photo: "assets/WhatsApp Image 2026-09-15 at 10.56.30 AM.jpeg",
             caption: "تمہارا نام میرے دل پر لکھی\nایک خوبصورت غزل سا لگتا ہے۔ ✨",
             isUrdu: true
         },
         {
-            tag: "MOMENT THIRTEEN",
+            tag: "MOMENT FOURTEEN",
             title: "Special Bond",
             photo: "assets/WhatsApp Image 2026-09-15 at 10.56.31 AM.jpeg",
             caption: "تمہاری قربت میں مجھے\nاپنی ہمیشہ کی خوشی مل گئی۔ ❤️",
@@ -180,24 +182,40 @@ document.addEventListener('DOMContentLoaded', () => {
             isUrdu: true
         },
         {
-            tag: "MOMENT FOURTEEN",
+            tag: "MOMENT FIFTEEN",
             title: "Heartwarming Days",
             photo: "assets/WhatsApp Image 2026-09-15 at 10.56.32 AM.jpeg",
             caption: "تم وہ حسین خیال ہو\nجس سے میرا دل کبھی نہیں تھکتا۔ 🫶",
             isUrdu: true
         },
         {
-            tag: "MOMENT FIFTEEN",
+            tag: "MOMENT SIXTEEN",
             title: "Forever Cherished",
             photo: "assets/WhatsApp Image 2026-09-15 at 10.56.33 AM.jpeg",
             caption: "تم سے محبت ایسا خواب ہے\nجس سے میرا دل کبھی جاگنا نہیں چاہتا۔ ❤️",
             isUrdu: true
         },
         {
-            tag: "MOMENT SIXTEEN",
+            tag: "MOMENT SEVENTEEN",
             title: "Always & Forever",
             photo: "assets/WhatsApp Image 2026-09-15 at 10.56.34 AM.jpeg",
             caption: "تم میری زندگی کی سب سے خوبصورت یاد ہو،\nجو ہر لمحے میرے دل میں زندہ رہے گی۔ 🤍✨",
+            isUrdu: true
+        },
+        {
+            tag: "MOMENT EIGHTEEN",
+            title: "Midnight Laughter",
+            photo: "assets/picgd1.jpeg",
+            caption: "محترم! 🤍\nجب آپ کے پاس کچھ بھی نہ رہے،\nتب بھی یقین رکھنا، محبت آپ کی رہے گی۔ 🫶🏻✨",
+            objectFit: "contain",
+            objectPosition: "center",
+            isUrdu: true
+        },
+        {
+            tag: "MOMENT NINETEEN",
+            title: "Unforgettable Days",
+            photo: "assets/picgd2.jpeg",
+            caption: "پیدائش سے پہلے میری خوشیاں رکھی گئی جہاں میں 🤍\nیعنی کہ محترم بڑے ہیں مجھ سے ✨",
             isUrdu: true
         }
     ];
@@ -517,21 +535,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 memoryPhoto.style.display = 'block';
                 if (photoFallbackArt) photoFallbackArt.style.display = 'none';
                 memoryPhoto.src = moment.photo;
-                memoryPhoto.style.objectFit = moment.objectFit || 'cover';
+                memoryPhoto.style.objectFit = moment.objectFit || 'contain';
                 memoryPhoto.style.objectPosition = moment.objectPosition || 'center';
 
                 // fullFrame: frame ki height barhao taake poori pic aaye
                 const photoFrame = document.querySelector('.glowing-photo-frame');
                 if (photoFrame) {
-                    if (moment.fullFrame) {
-                        photoFrame.style.width = '90vw';
-                        photoFrame.style.maxWidth = '340px';
-                        photoFrame.style.height = '420px';
-                    } else {
-                        photoFrame.style.width = '250px';
-                        photoFrame.style.maxWidth = '250px';
-                        photoFrame.style.height = '310px';
-                    }
+                    // Always use full frame to show pic in full size without cropping
+                    photoFrame.style.width = '90vw';
+                    photoFrame.style.maxWidth = '340px';
+                    photoFrame.style.height = '420px';
                 }
             }
             
